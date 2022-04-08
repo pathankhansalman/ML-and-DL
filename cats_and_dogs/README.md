@@ -6,4 +6,4 @@ This works on classifying a set of pictures of cats and dogs.
 This takes a training set of 4000 pictures of cats and dogs (each) and builds a CNN to classify pictures from a test set (of 1000 pictures each).
 
 ### Training accuracy: 90%. Validation accuracy: 81%
-### Runtime with GPU: 23s per epoch. Without GPU: 16s per epoch
+### Runtime without GPU: 23s per epoch. With GPU: 16s per epoch

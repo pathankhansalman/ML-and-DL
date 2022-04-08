@@ -57,7 +57,7 @@ cnn.compile(optimizer = 'adam', loss = 'binary_crossentropy',
             metrics = ['accuracy'])
 cnn.fit(x=training_set, validation_data=test_set, epochs=25)
 # Training accuracy: 90%. Validation accuracy: 81%
-# Runtime with GPU: 23s per epoch. Without GPU: 16s per epoch
+# Runtime without GPU: 23s per epoch. With GPU: 16s per epoch
 # TODO: Check validation accuracy with and without augmentation
 
 # Prediction
