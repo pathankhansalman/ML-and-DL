@@ -51,7 +51,7 @@ def run_comparison():
         df = pd.read_csv(data_path)
         # Check for NaNs (e.g., if an older incorrect version of the CSV is cached)
         if df.isna().any().any():
-            print("⚠️ Detected missing values (NaNs) in the loaded dataset. Re-generating fresh clean dataset...")
+            print("[WARNING] Detected missing values (NaNs) in the loaded dataset. Re-generating fresh clean dataset...")
             df = build_dataset(data_path)
         
     print(f"Loaded {len(df)} matches across {df['tournament'].nunique()} T20 World Cup editions.")
@@ -260,13 +260,13 @@ def run_comparison():
     # Explanation
     print("\nAnalytical Insight:")
     if gnn_auc > lr_auc:
-        print("💡 The Graph Neural Network outperformed Logistic Regression!")
+        print("[INSIGHT] The Graph Neural Network outperformed Logistic Regression!")
         print("   This is because the GNN leverages the graph structure, allowing it to capture transitive")
         print("   team relationships (e.g., if Team A beat Team B, and Team B beat Team C, the GNN infers")
         print("   strengths transitively). Logistic regression, treating each match as a separate independent")
         print("   row, cannot model this relational tournament topology.")
     else:
-        print("💡 Both models performed highly competitively!")
+        print("[INSIGHT] Both models performed highly competitively!")
         print("   Logistic Regression is a strong baseline because it directly weighs features like rank difference")
         print("   and venue biases. The GNN matches this performance while learning custom team embeddings")
         print("   from scratch based strictly on the tournament's match schedule graph.")

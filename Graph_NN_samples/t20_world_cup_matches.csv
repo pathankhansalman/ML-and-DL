@@ -1,0 +1,121 @@
+tournament,team_1,team_2,venue,toss_winner,toss_decision,is_day_night,dew_factor,winner,team_1_rank,team_2_rank,batting_first_won
+2021,IND,PAK,Dubai,PAK,field,1,1,PAK,1,4,0
+2021,NZ,PAK,Sharjah,PAK,field,1,0,PAK,3,4,0
+2021,AFG,PAK,Dubai,AFG,bat,1,1,PAK,10,4,0
+2021,IND,NZ,Dubai,NZ,field,1,1,NZ,1,3,0
+2021,ENG,AUS,Dubai,ENG,field,1,1,ENG,2,6,1
+2021,PAK,AUS,Dubai,AUS,field,1,1,AUS,4,6,0
+2021,NZ,AUS,Dubai,AUS,field,1,1,AUS,3,6,0
+2021,ENG,NZ,Abu Dhabi,NZ,field,1,0,NZ,2,3,0
+2021,SA,AUS,Abu Dhabi,AUS,field,0,0,AUS,5,6,0
+2021,BAN,SL,Sharjah,SL,field,0,0,SL,9,8,0
+2021,WI,ENG,Dubai,ENG,field,1,1,ENG,7,2,0
+2021,AFG,SCO,Sharjah,AFG,bat,1,0,AFG,10,14,1
+2021,AUS,SL,Dubai,AUS,field,1,1,AUS,6,8,1
+2021,WI,BAN,Sharjah,BAN,field,0,0,WI,7,9,1
+2021,ENG,SL,Sharjah,SL,field,1,0,ENG,2,8,1
+2021,SA,BAN,Abu Dhabi,SA,field,0,0,SA,5,9,1
+2021,NZ,SCO,Dubai,SCO,field,0,0,NZ,3,14,1
+2021,IND,AFG,Abu Dhabi,AFG,field,1,0,IND,1,10,1
+2021,AUS,BAN,Dubai,AUS,field,0,0,AUS,6,9,1
+2021,WI,SL,Abu Dhabi,WI,field,1,0,SL,7,8,0
+2021,NZ,NAM,Sharjah,NAM,field,0,0,NZ,3,16,1
+2021,IND,SCO,Dubai,IND,field,1,1,IND,1,14,1
+2021,AUS,WI,Abu Dhabi,AUS,field,0,0,AUS,6,7,1
+2021,ENG,SA,Sharjah,ENG,field,1,0,SA,2,5,0
+2021,AFG,NZ,Abu Dhabi,AFG,bat,0,0,NZ,10,3,0
+2021,NAM,IND,Dubai,IND,field,1,1,IND,16,1,0
+2022,PAK,IND,Melbourne,IND,field,1,0,IND,4,1,0
+2022,NZ,AUS,Sydney,AUS,field,1,0,NZ,3,6,1
+2022,ENG,AFG,Perth,ENG,field,1,0,ENG,2,10,1
+2022,IRE,SL,Hobart,IRE,bat,0,0,SL,12,8,0
+2022,BAN,NED,Hobart,NED,field,0,0,BAN,9,15,1
+2022,IND,NED,Sydney,IND,bat,1,0,IND,1,15,1
+2022,SA,BAN,Sydney,SA,bat,0,0,SA,5,9,1
+2022,IRE,ENG,Melbourne,ENG,field,0,0,IRE,12,2,1
+2022,ZIM,PAK,Perth,ZIM,bat,1,0,ZIM,11,4,1
+2022,NZ,SL,Sydney,NZ,bat,1,0,NZ,3,8,1
+2022,BAN,ZIM,Brisbane,BAN,bat,0,0,BAN,9,11,1
+2022,NED,PAK,Perth,NED,bat,0,0,PAK,15,4,0
+2022,IND,SA,Perth,IND,bat,1,0,SA,1,5,0
+2022,AUS,IRE,Brisbane,IRE,field,1,0,AUS,6,12,1
+2022,AFG,SL,Brisbane,AFG,bat,0,0,SL,10,8,0
+2022,ENG,NZ,Brisbane,ENG,bat,1,0,ENG,2,3,1
+2022,NED,ZIM,Adelaide,ZIM,bat,0,0,NED,15,11,1
+2022,IND,BAN,Adelaide,BAN,field,1,0,IND,1,9,1
+2022,PAK,SA,Sydney,PAK,bat,1,0,PAK,4,5,1
+2022,NZ,IRE,Adelaide,IRE,field,0,0,NZ,3,12,1
+2022,AUS,AFG,Adelaide,AFG,field,1,0,AUS,6,10,1
+2022,ENG,SL,Sydney,SL,bat,1,0,ENG,2,8,1
+2022,SA,NED,Adelaide,SA,field,0,0,NED,5,15,0
+2022,PAK,BAN,Adelaide,BAN,bat,0,0,PAK,4,9,1
+2022,IND,ZIM,Melbourne,IND,bat,1,0,IND,1,11,1
+2022,NZ,PAK,Sydney,NZ,bat,1,0,PAK,3,4,0
+2022,IND,ENG,Adelaide,ENG,field,1,0,ENG,1,2,0
+2022,PAK,ENG,Melbourne,ENG,field,1,0,ENG,4,2,0
+2024,IND,PAK,New York,PAK,field,0,0,IND,1,4,1
+2024,CAN,USA,Dallas,USA,field,1,0,USA,19,18,0
+2024,SA,SL,New York,SL,bat,0,0,SA,5,8,1
+2024,AFG,UGA,Providence,UGA,field,1,0,AFG,10,22,1
+2024,ENG,SCO,Barbados,SCO,bat,0,0,SCO,2,14,0
+2024,NED,NEP,Dallas,NED,field,0,0,NED,15,17,1
+2024,PAK,USA,Dallas,USA,field,0,0,USA,4,18,0
+2024,NAM,SCO,Barbados,NAM,bat,1,0,SCO,16,14,0
+2024,CAN,IRE,New York,IRE,field,0,0,CAN,19,12,1
+2024,NZ,AFG,Providence,NZ,field,1,0,AFG,3,10,0
+2024,SL,BAN,Dallas,BAN,field,1,0,BAN,8,9,0
+2024,NED,SA,New York,SA,field,0,0,SA,15,5,0
+2024,AUS,ENG,Barbados,ENG,field,0,0,AUS,6,2,1
+2024,WI,UGA,Providence,WI,bat,1,0,WI,7,22,1
+2024,SA,BAN,New York,SA,bat,0,0,SA,5,9,1
+2024,PAK,CAN,New York,PAK,field,0,0,PAK,4,19,1
+2024,SL,NEP,Lauderhill,NEP,field,1,0,SL,8,17,1
+2024,WI,NZ,Trinidad,NZ,field,1,0,WI,7,3,1
+2024,BAN,NED,St Vincent,NED,field,0,0,BAN,9,15,1
+2024,ENG,OMA,Antigua,ENG,field,0,0,ENG,2,20,1
+2024,AFG,PNG,Trinidad,AFG,field,1,0,AFG,10,21,1
+2024,USA,IRE,Lauderhill,USA,field,0,0,USA,18,12,1
+2024,SA,NEP,St Vincent,NEP,field,1,0,SA,5,17,1
+2024,NZ,UGA,Trinidad,NZ,field,1,0,NZ,3,22,1
+2024,IND,CAN,Lauderhill,CAN,field,0,0,IND,1,19,1
+2024,SCO,AUS,St Lucia,AUS,field,1,0,AUS,14,6,0
+2024,IRE,PAK,Lauderhill,PAK,field,0,0,PAK,12,4,0
+2024,BAN,NEP,St Vincent,NEP,field,0,0,BAN,9,17,1
+2024,AFG,WI,St Lucia,WI,field,1,0,WI,10,7,0
+2024,USA,SA,Antigua,USA,field,0,0,SA,18,5,0
+2024,ENG,WI,St Lucia,ENG,field,1,0,ENG,2,7,1
+2024,AFG,IND,Barbados,IND,bat,0,0,IND,10,1,0
+2024,AUS,BAN,Antigua,AUS,field,1,0,AUS,6,9,1
+2024,SA,ENG,St Lucia,ENG,field,0,0,SA,5,2,1
+2024,WI,USA,Barbados,WI,field,1,0,WI,7,18,1
+2024,AFG,AUS,St Vincent,AUS,field,1,0,AFG,10,6,1
+2024,ENG,USA,Barbados,ENG,field,0,0,ENG,2,18,1
+2024,WI,SA,Antigua,SA,field,1,0,SA,7,5,0
+2024,AUS,IND,St Lucia,AUS,field,0,0,IND,6,1,0
+2024,AFG,BAN,St Vincent,AFG,bat,1,0,AFG,10,9,1
+2024,AFG,SA,Trinidad,AFG,bat,0,0,SA,10,5,0
+2024,IND,ENG,Providence,ENG,field,0,0,IND,1,2,1
+2024,IND,SA,Barbados,IND,bat,0,0,IND,1,5,1
+2024,IND,NED,Providence,IND,bat,0,0,IND,1,15,1
+2021,OMA,ENG,Dubai,ENG,field,1,1,OMA,20,2,1
+2022,NEP,SCO,Sydney,SCO,field,1,0,SCO,17,14,0
+2024,CAN,PAK,New York,PAK,field,0,0,CAN,19,4,1
+2024,PAK,NED,Barbados,PAK,field,0,0,NED,4,15,0
+2021,ENG,USA,Sharjah,USA,field,1,0,ENG,2,18,1
+2024,NAM,SA,St Vincent,NAM,field,0,0,SA,16,5,0
+2021,NZ,WI,Abu Dhabi,NZ,field,1,0,NZ,3,7,1
+2021,SL,NAM,Dubai,NAM,field,1,1,NAM,8,16,0
+2021,PNG,NAM,Abu Dhabi,NAM,field,1,0,PNG,21,16,1
+2022,SL,NAM,Melbourne,SL,field,1,0,NAM,8,16,0
+2022,NAM,SL,Melbourne,SL,bat,0,0,SL,16,8,0
+2024,WI,AFG,St Lucia,WI,field,1,0,AFG,7,10,0
+2021,UGA,SA,Abu Dhabi,SA,field,1,0,SA,22,5,0
+2024,SA,IRE,St Lucia,IRE,field,0,0,SA,5,12,1
+2022,NZ,NED,Adelaide,NED,bat,1,0,NED,3,15,0
+2022,NEP,NZ,Hobart,NEP,bat,1,0,NZ,17,3,0
+2024,AUS,SL,St Lucia,SL,bat,1,0,AUS,6,8,1
+2024,NAM,AUS,Barbados,AUS,field,1,0,AUS,16,6,0
+2022,CAN,AFG,Melbourne,AFG,field,1,0,AFG,19,10,0
+2021,ZIM,SCO,Dubai,ZIM,field,1,1,SCO,11,14,0
+2022,ZIM,AFG,Adelaide,ZIM,field,0,0,AFG,11,10,0
+2021,NEP,PNG,Abu Dhabi,PNG,bat,1,0,NEP,17,21,1
