@@ -4,29 +4,104 @@ import torch.nn.functional as F
 import math
 from typing import List, Dict, Tuple, Optional
 
-class SimpleTokenizer:
-    """A lightweight character-level tokenizer for demonstration purposes."""
-    def __init__(self, text_corpus: str):
-        # Create a sorted list of unique characters in the corpus
-        self.chars = sorted(list(set(text_corpus)))
-        # Add special tokens
-        if '<pad>' not in self.chars:
-            self.chars.append('<pad>')
-        if '<unk>' not in self.chars:
-            self.chars.append('<unk>')
+class BPETokenizer:
+    """A lightweight, from-scratch Byte Pair Encoding (BPE) Subword Tokenizer."""
+    def __init__(self, text_corpus: str, num_merges: int = 40):
+        self.special_tokens = ['<pad>', '<unk>', ' ', '</w>']
+        unique_chars = sorted(list(set(text_corpus)))
+        # Remove duplicates if space exists in corpus already
+        unique_chars = [c for c in unique_chars if c not in self.special_tokens]
+        self.vocab = self.special_tokens + unique_chars
+        self.vocab_size = len(self.vocab)
         
-        self.vocab_size = len(self.chars)
-        self.char_to_id = {char: idx for idx, char in enumerate(self.chars)}
-        self.id_to_char = {idx: char for idx, char in enumerate(self.chars)}
+        self.token_to_id = {t: i for i, t in enumerate(self.vocab)}
+        self.id_to_token = {i: t for t, i in self.token_to_id.items()}
         
-        self.pad_id = self.char_to_id['<pad>']
-        self.unk_id = self.char_to_id['<unk>']
+        self.pad_id = self.token_to_id['<pad>']
+        self.unk_id = self.token_to_id['<unk>']
+        self.merges = {}
+        
+        self._train_bpe(text_corpus, num_merges)
+        
+    def _train_bpe(self, corpus: str, num_merges: int):
+        words = corpus.split(' ')
+        tokenized_words = [list(w) + ['</w>'] for w in words]
+        
+        if '</w>' not in self.token_to_id:
+            self._add_to_vocab('</w>')
+            
+        for _ in range(num_merges):
+            pairs = {}
+            for word in tokenized_words:
+                for i in range(len(word) - 1):
+                    pair = (word[i], word[i+1])
+                    pairs[pair] = pairs.get(pair, 0) + 1
+            
+            if not pairs:
+                break
+                
+            best_pair = max(pairs, key=pairs.get)
+            if pairs[best_pair] < 2:
+                break
+                
+            merged_token = best_pair[0] + best_pair[1]
+            self._add_to_vocab(merged_token)
+            self.merges[best_pair] = merged_token
+            
+            new_tokenized_words = []
+            for word in tokenized_words:
+                new_word = []
+                i = 0
+                while i < len(word):
+                    if i < len(word) - 1 and (word[i], word[i+1]) == best_pair:
+                        new_word.append(merged_token)
+                        i += 2
+                    else:
+                        new_word.append(word[i])
+                        i += 1
+                new_tokenized_words.append(new_word)
+            tokenized_words = new_tokenized_words
+
+    def _add_to_vocab(self, token: str):
+        if token not in self.token_to_id:
+            new_id = len(self.vocab)
+            self.vocab.append(token)
+            self.token_to_id[token] = new_id
+            self.id_to_token[new_id] = token
+            self.vocab_size = len(self.vocab)
 
     def encode(self, text: str) -> List[int]:
-        return [self.char_to_id.get(char, self.unk_id) for char in text]
+        words = text.split(' ')
+        encoded_ids = []
+        
+        for w_idx, w in enumerate(words):
+            word_tokens = list(w) + ['</w>']
+            for pair, merged in self.merges.items():
+                new_word = []
+                i = 0
+                while i < len(word_tokens):
+                    if i < len(word_tokens) - 1 and (word_tokens[i], word_tokens[i+1]) == pair:
+                        new_word.append(merged)
+                        i += 2
+                    else:
+                        new_word.append(word_tokens[i])
+                        i += 1
+                word_tokens = new_word
+            
+            for token in word_tokens:
+                encoded_ids.append(self.token_to_id.get(token, self.unk_id))
+            
+            if w_idx < len(words) - 1:
+                if ' ' not in self.token_to_id:
+                    self._add_to_vocab(' ')
+                encoded_ids.append(self.token_to_id[' '])
+                
+        return encoded_ids
 
     def decode(self, ids: List[int]) -> str:
-        return "".join([self.id_to_char.get(idx, '<unk>') for idx in ids if idx != self.pad_id])
+        tokens = [self.id_to_token.get(idx, '<unk>') for idx in ids if idx != self.pad_id]
+        decoded = "".join(tokens).replace('</w>', ' ')
+        return decoded
 
 
 class GraphTransformerLayer(nn.Module):

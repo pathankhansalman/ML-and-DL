@@ -2,7 +2,7 @@ import torch
 import torch.optim as optim
 import torch.nn as nn
 import numpy as np
-from graph_transformer import SimpleTokenizer, GraphTransformerModel, compute_cosine_similarity
+from graph_transformer import BPETokenizer, GraphTransformerModel, compute_cosine_similarity
 from visualizer import draw_token_graph
 import os
 
@@ -24,7 +24,7 @@ def main():
     print(f"\n[1] Prepared training corpus ({len(corpus)} characters).")
     
     # 2. Tokenizer setup
-    tokenizer = SimpleTokenizer(corpus)
+    tokenizer = BPETokenizer(corpus, num_merges=30)
     print(f"    Vocabulary Size: {tokenizer.vocab_size} characters/tokens.")
     
     # 3. Model setup
@@ -42,12 +42,10 @@ def main():
     ).to(device)
     
     # 4. Prepare training data
-    # Create input-target pairs for next-token prediction
-    input_text = corpus[:-1]
-    target_text = corpus[1:]
-    
-    input_ids = torch.tensor([tokenizer.encode(input_text)], dtype=torch.long, device=device)
-    target_ids = torch.tensor([tokenizer.encode(target_text)], dtype=torch.long, device=device)
+    # Tokenize full corpus first, then slice token IDs to preserve subword alignments
+    full_ids = tokenizer.encode(corpus)
+    input_ids = torch.tensor([full_ids[:-1]], dtype=torch.long, device=device)
+    target_ids = torch.tensor([full_ids[1:]], dtype=torch.long, device=device)
     
     # 5. Train the model
     print("\n[2] Training the Graph Transformer model (Next Token Prediction)...")
@@ -124,8 +122,8 @@ def main():
         # attention_maps[0] shape: [1, n_heads, seq_len, seq_len]
         attn_matrix = attention_maps[0][0].mean(dim=0).cpu().numpy()
         
-    # Split token characters for node labels
-    tokens = list(sample_sentence)
+    # Extract BPE subword token strings for node labels
+    tokens = [tokenizer.id_to_token[idx] for idx in tokenizer.encode(sample_sentence)]
     
     plot_dir = os.path.join(os.getcwd(), "plots")
     os.makedirs(plot_dir, exist_ok=True)
