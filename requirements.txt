@@ -1,0 +1,10 @@
+torch
+numpy
+scikit-learn
+transformers
+datasets
+matplotlib
+pandas
+nltk
+networkx
+accelerate

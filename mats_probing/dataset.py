@@ -1,0 +1,165 @@
+import json
+import os
+from sklearn.model_selection import train_test_split
+
+# Hardcoded fallback dataset of 100 sentences (50 positive, 50 negative)
+FALLBACK_SENTENCES = [
+    # Positive Sentences (50)
+    {"text": "I absolutely loved this movie!", "label": 1},
+    {"text": "What a beautiful and heartwarming story.", "label": 1},
+    {"text": "The acting was superb and the visuals were stunning.", "label": 1},
+    {"text": "An absolute masterpiece of modern cinema.", "label": 1},
+    {"text": "I left the theater feeling incredibly happy.", "label": 1},
+    {"text": "It was a highly entertaining and fun ride.", "label": 1},
+    {"text": "Every scene was filled with joy and excitement.", "label": 1},
+    {"text": "The characters were extremely well-developed.", "label": 1},
+    {"text": "A brilliant performance by the entire cast.", "label": 1},
+    {"text": "I would highly recommend this to anyone.", "label": 1},
+    {"text": "It exceeded all of my expectations.", "label": 1},
+    {"text": "A wonderful experience from start to finish.", "label": 1},
+    {"text": "The music was uplifting and memorable.", "label": 1},
+    {"text": "A truly inspiring and powerful film.", "label": 1},
+    {"text": "I couldn't stop smiling throughout the show.", "label": 1},
+    {"text": "It was a spectacular visual achievement.", "label": 1},
+    {"text": "A very sweet and delightful story.", "label": 1},
+    {"text": "The plot was engaging and kept me hooked.", "label": 1},
+    {"text": "It is one of the best movies of the year.", "label": 1},
+    {"text": "Highly creative and original storytelling.", "label": 1},
+    {"text": "The direction was top-notch and elegant.", "label": 1},
+    {"text": "A beautiful message that resonates deeply.", "label": 1},
+    {"text": "It brought tears of joy to my eyes.", "label": 1},
+    {"text": "Absolutely brilliant writing.", "label": 1},
+    {"text": "The humor was perfect and made me laugh out loud.", "label": 1},
+    {"text": "A stunning masterpiece that deserves awards.", "label": 1},
+    {"text": "I loved the chemistry between the leads.", "label": 1},
+    {"text": "It is an incredibly positive and uplifting film.", "label": 1},
+    {"text": "A great story well told.", "label": 1},
+    {"text": "The pacing was perfect and kept my attention.", "label": 1},
+    {"text": "A truly memorable cinematic experience.", "label": 1},
+    {"text": "I was thoroughly impressed by this piece.", "label": 1},
+    {"text": "An outstanding work of art.", "label": 1},
+    {"text": "It had a fantastic and satisfying ending.", "label": 1},
+    {"text": "A warm, charming, and smart film.", "label": 1},
+    {"text": "I enjoyed every single second of it.", "label": 1},
+    {"text": "It was filled with great action and energy.", "label": 1},
+    {"text": "The cinematography was gorgeous.", "label": 1},
+    {"text": "A highly positive and refreshing take.", "label": 1},
+    {"text": "I found it extremely touching.", "label": 1},
+    {"text": "An excellent and well-made film.", "label": 1},
+    {"text": "It was full of charm and magic.", "label": 1},
+    {"text": "The script was clever and witty.", "label": 1},
+    {"text": "I am so glad I watched this.", "label": 1},
+    {"text": "It is a absolute triumph.", "label": 1},
+    {"text": "A great movie with a lot of heart.", "label": 1},
+    {"text": "It was deeply satisfying and fun.", "label": 1},
+    {"text": "A marvel of modern filmmaking.", "label": 1},
+    {"text": "I loved the vibrant atmosphere.", "label": 1},
+    {"text": "A fantastic journey that I won't forget.", "label": 1},
+
+    # Negative Sentences (50)
+    {"text": "This was a complete waste of time.", "label": 0},
+    {"text": "The acting was terrible and flat.", "label": 0},
+    {"text": "I hated every single minute of this movie.", "label": 0},
+    {"text": "The plot made no sense whatsoever.", "label": 0},
+    {"text": "A cheap and lazy attempt at cinema.", "label": 0},
+    {"text": "I left the theater feeling extremely disappointed.", "label": 0},
+    {"text": "It was boring, slow, and uninteresting.", "label": 0},
+    {"text": "The characters were annoying and unlikeable.", "label": 0},
+    {"text": "A garbage script with awful dialog.", "label": 0},
+    {"text": "I would not recommend this to my worst enemy.", "label": 0},
+    {"text": "It fell way short of my expectations.", "label": 0},
+    {"text": "A miserable experience from start to finish.", "label": 0},
+    {"text": "The music was loud, annoying, and distracting.", "label": 0},
+    {"text": "A completely pointless and boring film.", "label": 0},
+    {"text": "I couldn't stand watching it any longer.", "label": 0},
+    {"text": "It was a major technical disaster.", "label": 0},
+    {"text": "A very sour and depressing story.", "label": 0},
+    {"text": "The plot was predictable and dull.", "label": 0},
+    {"text": "It is one of the worst movies I have ever seen.", "label": 0},
+    {"text": "Lacked any sort of creativity or originality.", "label": 0},
+    {"text": "The direction was messy and confusing.", "label": 0},
+    {"text": "A negative message that felt mean-spirited.", "label": 0},
+    {"text": "It brought tears of frustration to my eyes.", "label": 0},
+    {"text": "Absolutely awful writing.", "label": 0},
+    {"text": "The jokes were flat and failed to get laughs.", "label": 0},
+    {"text": "A total failure that deserves no praise.", "label": 0},
+    {"text": "There was zero chemistry between the actors.", "label": 0},
+    {"text": "It is an incredibly depressing and dull film.", "label": 0},
+    {"text": "A poor story poorly told.", "label": 0},
+    {"text": "The pacing was terrible and dragged on forever.", "label": 0},
+    {"text": "A forgettable and annoying experience.", "label": 0},
+    {"text": "I was thoroughly unimpressed.", "label": 0},
+    {"text": "A lazy piece of trash.", "label": 0},
+    {"text": "It had a terrible and unsatisfying ending.", "label": 0},
+    {"text": "A cold, boring, and stupid film.", "label": 0},
+    {"text": "I regretted every second of it.", "label": 0},
+    {"text": "It was filled with cheap jump scares and noise.", "label": 0},
+    {"text": "The cinematography was ugly and dark.", "label": 0},
+    {"text": "A highly negative and tiring experience.", "label": 0},
+    {"text": "I found it extremely offensive and bad.", "label": 0},
+    {"text": "An awful and poorly constructed film.", "label": 0},
+    {"text": "It was completely devoid of charm.", "label": 0},
+    {"text": "The script was dull and predictable.", "label": 0},
+    {"text": "I am so sorry I watched this.", "label": 0},
+    {"text": "It is an absolute failure.", "label": 0},
+    {"text": "A bad movie with no heart at all.", "label": 0},
+    {"text": "It was deeply unsatisfying and painful.", "label": 0},
+    {"text": "A disaster of modern filmmaking.", "label": 0},
+    {"text": "I hated the dull atmosphere.", "label": 0},
+    {"text": "A terrible waste of talent.", "label": 0}
+]
+
+def load_or_create_dataset(filepath="dataset.json", use_huggingface=True):
+    """
+    Loads dataset from a local JSON file if it exists.
+    If not, tries to load rotten_tomatoes from Hugging Face (if use_huggingface=True),
+    otherwise falls back to the local 100-sentence dataset, and saves it locally.
+    """
+    if os.path.exists(filepath):
+        print(f"Loading cached dataset from {filepath}")
+        with open(filepath, "r") as f:
+            data = json.load(f)
+        return data
+
+    data = []
+    if use_huggingface:
+        try:
+            print("Attempting to load 'rotten_tomatoes' dataset from Hugging Face...")
+            # pyrefly: ignore [missing-import]
+            from datasets import load_dataset
+            dataset = load_dataset("rotten_tomatoes", split="train")
+            # Select 50 positive and 50 negative examples for a lightweight 100-sentence set
+            pos = [x for x in dataset if x["label"] == 1][:50]
+            neg = [x for x in dataset if x["label"] == 0][:50]
+            for item in pos + neg:
+                data.append({"text": item["text"], "label": item["label"]})
+            print("Successfully loaded from Hugging Face!")
+        except Exception as e:
+            print(f"Failed to load from Hugging Face ({e}). Falling back to local dataset.")
+            data = FALLBACK_SENTENCES
+    else:
+        print("Using local hardcoded sentiment dataset.")
+        data = FALLBACK_SENTENCES
+
+    # Save to local file
+    with open(filepath, "w") as f:
+        json.dump(data, f, indent=4)
+    print(f"Saved dataset to {filepath}")
+    
+    return data
+
+def get_train_test_split(filepath="dataset.json", use_huggingface=True, test_size=0.2, random_state=42):
+    """
+    Loads dataset and splits it into training and testing sets.
+    """
+    data = load_or_create_dataset(filepath, use_huggingface)
+    texts = [item["text"] for item in data]
+    labels = [item["label"] for item in data]
+    
+    return train_test_split(texts, labels, test_size=test_size, random_state=random_state, stratify=labels)
+
+if __name__ == "__main__":
+    # Test execution
+    train_texts, test_texts, train_labels, test_labels = get_train_test_split(use_huggingface=False)
+    print(f"Train size: {len(train_texts)}, Test size: {len(test_texts)}")
+    print(f"First training example: '{train_texts[0]}' -> Label: {train_labels[0]}")
