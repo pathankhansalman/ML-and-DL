@@ -22,3 +22,16 @@ This file serves as a simple record of concepts, experiments, and results we hav
 ## 4. Chain of Thought (CoT) Monitoring
 * **Written CoT Monitoring:** An external AI reads the step-by-step written reasoning of another AI to check for errors, lies, or safety issues before showing it to the user.
 * **Internal CoT Monitoring:** Probing and patching allow us to inspect the "hidden" thinking process of a model directly inside its activations when it does not write its thinking steps down.
+
+## 5. Sparse Autoencoders (SAEs) & Transcoders
+* **Polysemanticity Problem:** A single neuron in a neural network often fires for multiple unrelated concepts (e.g., "pulp fiction" and "orange juice").
+* **Sparse Autoencoders (SAEs):** Act like a prism that separates these messy activations into thousands of clean, single-purpose concept directions (features). They enforce *sparsity* (only a few features are active at once) to ensure clarity.
+* **Feature Absorption:** A drawback in L1-regularized SAEs where the sparsity penalty forces the model to merge specific features (e.g. "French cities") into more general, frequent features (e.g. "European locations").
+* **Top-K SAEs:** Fix feature absorption by selecting the top $K$ active features directly rather than using an L1 loss penalty.
+* **Transcoders:** Sit across a layer to show how the model transforms one concept into another (e.g., input "France" $\rightarrow$ output "Paris").
+
+## 6. Recursive Self-Improvement
+* **What it is:** A loop where an AI writes code to improve its own algorithms, making itself smarter. 
+* **The Loop:** AI v1 builds a smarter AI v2. AI v2 is now better at coding, so it builds an even smarter AI v3.
+* **Safety Concern:** This can trigger an *intelligence explosion* (exponential jump in power). If the AI is not perfectly aligned with human safety before the loop starts, it could become a superintelligent system that is impossible to control.
+
