@@ -32,39 +32,7 @@ ITALY_SENTENCES = [
     "The cuisine of Italy is world-famous."
 ]
 
-class ActivationCache:
-    def __init__(self):
-        self.cache = {}
-
-    def get_hook(self, layer_idx):
-        def hook(module, input, output):
-            hidden_states = output[0] if isinstance(output, tuple) else output
-            self.cache[layer_idx] = hidden_states.detach().clone()
-        return hook
-
-def patch_hook_builder(target_token_idx, source_activation):
-    def hook(module, input, output):
-        if isinstance(output, tuple):
-            hidden_states = output[0].clone()
-            hidden_states[:, target_token_idx, :] = source_activation[:, target_token_idx, :]
-            return (hidden_states,) + output[1:]
-        else:
-            out = output.clone()
-            out[:, target_token_idx, :] = source_activation[:, target_token_idx, :]
-            return out
-    return hook
-
-def find_token_idx(tokenizer, text, target_word=" France"):
-    """
-    Finds the token index of a specific word in the tokenized text.
-    """
-    tokens = tokenizer.tokenize(text)
-    # Target word might match exactly or with leading space/capitalization
-    for idx, token in enumerate(tokens):
-        decoded = tokenizer.convert_tokens_to_string([token])
-        if target_word.strip().lower() in decoded.strip().lower():
-            return idx
-    return len(tokens) - 1  # Fallback to last token if not found
+from utils import ActivationCache, patch_hook_builder, find_token_idx
 
 def run_holistic_analysis():
     device = "cuda" if torch.cuda.is_available() else "cpu"

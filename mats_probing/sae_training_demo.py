@@ -32,15 +32,7 @@ class SparseAutoencoder(nn.Module):
         
         return reconstruction, feature_acts
 
-# Helper to extract MLP activations
-class ActivationCollector:
-    def __init__(self):
-        self.activations = []
-
-    def hook(self, module, input, output):
-        # Qwen MLP layer output is the first element
-        hidden_states = output[0] if isinstance(output, tuple) else output
-        self.activations.append(hidden_states.detach())
+from utils import ActivationCollector
 
 def run_sae_training_demo():
     device = "cuda" if torch.cuda.is_available() else "cpu"

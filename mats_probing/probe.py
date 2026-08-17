@@ -28,20 +28,7 @@ class PyTorchLinearRegression(nn.Module):
     def forward(self, x):
         return self.linear(x)
 
-class ActivationExtractor:
-    """
-    Helper class to manage forward hooks and store activations.
-    """
-    def __init__(self):
-        self.activations = {}
-
-    def get_hook(self, layer_num):
-        def hook(module, input, output):
-            # Qwen output is a tuple (hidden_states, optional_caches_etc)
-            # The residual stream tensor is the first element
-            hidden_states = output[0] if isinstance(output, tuple) else output
-            self.activations[layer_num] = hidden_states.detach()
-        return hook
+from utils import ActivationCache as ActivationExtractor
 
 def extract_last_token_activations(model, tokenizer, texts, layer_num, device):
     """

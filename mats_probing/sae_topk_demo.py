@@ -41,14 +41,7 @@ class TopKSparseAutoencoder(nn.Module):
         
         return reconstruction, feature_acts
 
-# Helper to extract activations
-class ActivationCollector:
-    def __init__(self):
-        self.activations = []
-
-    def hook(self, module, input, output):
-        hidden_states = output[0] if isinstance(output, tuple) else output
-        self.activations.append(hidden_states.detach())
+from utils import ActivationCollector
 
 def run_topk_sae_demo():
     device = "cuda" if torch.cuda.is_available() else "cpu"

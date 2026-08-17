@@ -4,36 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-class ActivationCache:
-    """
-    Caches hidden states during a model forward pass.
-    """
-    def __init__(self):
-        self.cache = {}
-
-    def get_hook(self, layer_idx):
-        def hook(module, input, output):
-            # Qwen residual stream output is the first element of the output tuple
-            hidden_states = output[0] if isinstance(output, tuple) else output
-            self.cache[layer_idx] = hidden_states.detach().clone()
-        return hook
-
-def patch_hook_builder(target_token_idx, clean_activation):
-    """
-    Builds a hook that replaces the activation at a specific token position
-    with the corresponding clean activation.
-    """
-    def hook(module, input, output):
-        # Check if output is a tuple (typical for HF attention/layer outputs)
-        if isinstance(output, tuple):
-            hidden_states = output[0]
-            # Replace activation at target_token_idx
-            hidden_states[:, target_token_idx, :] = clean_activation[:, target_token_idx, :]
-            return (hidden_states,) + output[1:]
-        else:
-            output[:, target_token_idx, :] = clean_activation[:, target_token_idx, :]
-            return output
-    return hook
+from utils import ActivationCache, patch_hook_builder
 
 def run_systematic_patching():
     device = "cuda" if torch.cuda.is_available() else "cpu"
