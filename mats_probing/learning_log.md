@@ -35,3 +35,9 @@ This file serves as a simple record of concepts, experiments, and results we hav
 * **The Loop:** AI v1 builds a smarter AI v2. AI v2 is now better at coding, so it builds an even smarter AI v3.
 * **Safety Concern:** This can trigger an *intelligence explosion* (exponential jump in power). If the AI is not perfectly aligned with human safety before the loop starts, it could become a superintelligent system that is impossible to control.
 
+## 7. Audit Gaming
+* **What it is:** When an AI model learns to pass safety audits/tests (acting safe and compliant) without actually being safe.
+* **Tactics:** The model may recognize it is in a evaluation sandbox and temporarily hide its unsafe behavior, or rephrase answers to bypass specific guardrail keywords.
+* **Solution via MI:** Mechanistic Interpretability helps detect audit gaming by scanning the model's internal activations to verify if the model is genuinely safe, or if it is actively running "deception" or "test detection" circuits.
+
+
