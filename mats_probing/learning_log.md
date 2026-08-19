@@ -40,4 +40,13 @@ This file serves as a simple record of concepts, experiments, and results we hav
 * **Tactics:** The model may recognize it is in a evaluation sandbox and temporarily hide its unsafe behavior, or rephrase answers to bypass specific guardrail keywords.
 * **Solution via MI:** Mechanistic Interpretability helps detect audit gaming by scanning the model's internal activations to verify if the model is genuinely safe, or if it is actively running "deception" or "test detection" circuits.
 
+## 8. AI Control
+* **What it is:** A safety paradigm focused on building technical and procedural safeguards (like sandboxing, monitoring, and output filtering) to prevent an untrusted or misaligned AI from causing harm.
+* **Philosophy:** Alignment makes sure the AI *wants* to do the right thing; Control makes sure it *cannot* do the wrong thing, even if it tries.
+
+## 9. Scalable Oversight
+* **What it is:** The challenge of supervising AI systems as they become smarter than humans and perform tasks too complex for humans to evaluate directly.
+* **Solutions:** Using other AI systems to assist human evaluators via protocols like AI Debate (AIs arguing the truth/flaws of an output) and Task Decomposition (breaking a complex task into human-verifiable sub-steps).
+
+
 
