@@ -48,5 +48,21 @@ This file serves as a simple record of concepts, experiments, and results we hav
 * **What it is:** The challenge of supervising AI systems as they become smarter than humans and perform tasks too complex for humans to evaluate directly.
 * **Solutions:** Using other AI systems to assist human evaluators via protocols like AI Debate (AIs arguing the truth/flaws of an output) and Task Decomposition (breaking a complex task into human-verifiable sub-steps).
 
+## 10. Tactic 3: Liquidity Splitting Evasion (Experiment Results)
+* **Status:** Completed probing and causal patching sweeps on `Qwen/Qwen2.5-0.5B` using a custom dataset of 30 contrastive compliance/evasion prompts.
+* **Key Observations:**
+  1. *Intent Formation:* Probing showed that the compliance representation is localized and formed only once the model processes the token `" comply"` (index 21).
+  2. *Information Routing:* Patching sweeps verified that middle layers are causally sufficient/necessary at the `" comply"` token, while in late layers (20-23) the causal control shifts entirely to the final token `" exchange"`.
+* **Current Workspace Files:**
+  * `tactic_liquidity_evasion.py`: Runs the probing and patching sweeps.
+  * `liquidity_evasion_comparison.png`: Generated heatmap plots.
+  * `train_sae_overnight.py`: Script configured to train a Top-K SAE on Layer 10 MLP outputs for 5,000 steps overnight.
+
+## Next Steps for the Research Task
+1. **Launch the Overnight Run:** Execute `.venv\Scripts\python mats_probing/train_sae_overnight.py` (which will run for 5,000 steps without counting towards the active 20-hour budget).
+2. **SAE Feature Analysis:** Inspect the saved `qwen_sae_weights.pt` to isolate the active features for the `" bypass"`/`" comply"` concepts.
+3. **Application Report Draft:** Compile the executive summary and research results into the MATS application write-up.
+
+
 
 
