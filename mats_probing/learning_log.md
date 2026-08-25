@@ -58,10 +58,20 @@ This file serves as a simple record of concepts, experiments, and results we hav
   * `liquidity_evasion_comparison.png`: Generated heatmap plots.
   * `train_sae_overnight.py`: Script configured to train a Top-K SAE on Layer 10 MLP outputs for 5,000 steps overnight.
 
+## 11. Direct Logit Attribution (DLA) Results
+* **Status:** Completed DLA sweeps on `Qwen/Qwen2.5-0.5B` at the final token positions (`" the"`/`" dark"`) preceding the targets (`" exchange"`/`" pools"`).
+* **Key Observations:**
+  1. *MLP Domination:* Late-layer MLP blocks (Layers 20-23) show extremely high direct logit attribution, meaning they are the primary components writing the final token prediction directly to the output logits.
+  2. *Attention Routing:* Attention blocks across all layers have very low direct logit attribution. This confirms the hypothesis that Attention acts primarily as a router (moving the compliance representations to the final token), whereas MLPs perform the final computation and projection to the logits.
+* **Current Workspace Files:**
+  * `direct_logit_attribution.py`: Computes and plots the layer-wise DLA.
+  * `direct_logit_attribution.png`: Bar chart visualization of attention vs. MLP contributions.
+
 ## Next Steps for the Research Task
-1. **Launch the Overnight Run:** Execute `.venv\Scripts\python mats_probing/train_sae_overnight.py` (which will run for 5,000 steps without counting towards the active 20-hour budget).
-2. **SAE Feature Analysis:** Inspect the saved `qwen_sae_weights.pt` to isolate the active features for the `" bypass"`/`" comply"` concepts.
+1. **Activation Steering:** Implement a demonstration script to inject the compliance vector into Layer 21 MLP input and verify if we can steer the model's behavior.
+2. **SAE Feature Analysis:** Train and inspect the saved `qwen_sae_weights.pt` to isolate the active features for the `" bypass"`/`" comply"` concepts.
 3. **Application Report Draft:** Compile the executive summary and research results into the MATS application write-up.
+
 
 
 
