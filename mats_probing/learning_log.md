@@ -67,10 +67,25 @@ This file serves as a simple record of concepts, experiments, and results we hav
   * `direct_logit_attribution.py`: Computes and plots the layer-wise DLA.
   * `direct_logit_attribution.png`: Bar chart visualization of attention vs. MLP contributions.
 
+## 12. MATS Application Pitch: Evasion Circuitry & Safety Monitoring
+* **Research Question:** Can we detect and prevent regulatory evasion behaviors (e.g., liquidity splitting to bypass ADV limits) in autonomous LLM trading agents before they are executed?
+* **Methodology:**
+  1. **Probing (Correlational):** Train a logistic regression probe on hidden activations of `Qwen/Qwen2.5-0.5B` to identify the token position where compliance vs. evasion intent is first formed. Result: Representation forms cleanly at the `" comply"` / `" bypass"` token in middle layers.
+  2. **Activation Patching (Causal Verification):** Run causal sweeps (rescue and knockout patching) to map information routing. Result: Middle layers are causally sufficient/necessary at the `" comply"` token, while late layers transfer causal control to the final sequence position.
+  3. **Direct Logit Attribution (DLA) (Final Projection):** Decompose the output logit difference `logit(exchange) - logit(pools)` to find which specific components write the decision. Result: Late-layer MLPs (Layers 20-23) dominate output generation, while Attention acts purely as a router, writing negligible direct logits.
+* **Safety Application:**
+  * **Lie Detection / Monitoring:** Run probes on middle-layer residual streams to detect the "intent to evade" 10+ tokens before the agent outputs the actual action, enabling early trade blocking.
+  * **Steering / Alignment:** Inject a "compliance vector" ($v_{\text{steer}}$) directly into the input of Layer 21 MLP at the final token position to force compliant behaviors at inference time without model retraining.
+* **Theoretical Citations:**
+  * *Residual Stream & DLA:* Anthropic's *Mathematical Framework for Transformer Circuits* (Elhage et al., 2021)
+  * *Decoded States:* *Logit Lens* (nostalgebraist, 2020)
+  * *DLA Limitations (Clean-up layers):* *An Adversarial Example for Direct Logit Attribution* (Janiak et al., 2024), justifying the need to validate DLA results using causal patching.
+
 ## Next Steps for the Research Task
 1. **Activation Steering:** Implement a demonstration script to inject the compliance vector into Layer 21 MLP input and verify if we can steer the model's behavior.
 2. **SAE Feature Analysis:** Train and inspect the saved `qwen_sae_weights.pt` to isolate the active features for the `" bypass"`/`" comply"` concepts.
 3. **Application Report Draft:** Compile the executive summary and research results into the MATS application write-up.
+
 
 
 
