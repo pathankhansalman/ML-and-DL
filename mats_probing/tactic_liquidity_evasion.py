@@ -168,7 +168,8 @@ def run_liquidity_evasion_analysis():
             knockout_matrix[layer_idx, token_idx] = (clean_logit_diff - diff) / (clean_logit_diff - corrupted_logit_diff)
 
     # --- 4. Plot and Save ---
-    fig, axes = plt.subplots(1, 3, figsize=(22, 7))
+    plt.style.use('seaborn-v0_8-whitegrid' if 'seaborn-v0_8-whitegrid' in plt.style.available else 'default')
+    fig, axes = plt.subplots(1, 3, figsize=(24, 7.5), dpi=300)
 
     # Probing Heatmap
     sns.heatmap(
@@ -176,15 +177,17 @@ def run_liquidity_evasion_analysis():
         xticklabels=token_labels, 
         yticklabels=list(range(num_layers)), 
         cmap="Purples", 
-        annot=True, 
-        fmt=".2f", 
+        annot=False, 
         ax=axes[0],
         vmin=0, 
-        vmax=1
+        vmax=1,
+        cbar_kws={'label': "Probe Probability P(Compliance)"}
     )
-    axes[0].set_title("Probing: Probability of 'Compliance'")
-    axes[0].set_xlabel("Token Position")
-    axes[0].set_ylabel("Layer")
+    axes[0].set_title("(A) Linear Probing: Compliance Intent Formation", fontsize=12, fontweight="bold", pad=10)
+    axes[0].set_xlabel("Token Position in Prompt", fontsize=10, fontweight="bold")
+    axes[0].set_ylabel("Model Layer", fontsize=10, fontweight="bold")
+    axes[0].tick_params(axis='x', rotation=60, labelsize=8)
+    axes[0].tick_params(axis='y', labelsize=8)
     axes[0].invert_yaxis()
 
     # Rescue Heatmap
@@ -193,14 +196,18 @@ def run_liquidity_evasion_analysis():
         xticklabels=token_labels, 
         yticklabels=list(range(num_layers)), 
         cmap="RdBu_r", 
-        annot=True, 
-        fmt=".2f", 
+        annot=False, 
         ax=axes[1],
-        center=0.0
+        center=0.0,
+        vmin=-0.2,
+        vmax=1.0,
+        cbar_kws={'label': "Normalized Causal Effect"}
     )
-    axes[1].set_title("Rescue Patching (Sufficient to enforce Compliance)")
-    axes[1].set_xlabel("Token Position")
-    axes[1].set_ylabel("Layer")
+    axes[1].set_title("(B) Rescue Patching (Causally Sufficient)", fontsize=12, fontweight="bold", pad=10)
+    axes[1].set_xlabel("Token Position in Prompt", fontsize=10, fontweight="bold")
+    axes[1].set_ylabel("Model Layer", fontsize=10, fontweight="bold")
+    axes[1].tick_params(axis='x', rotation=60, labelsize=8)
+    axes[1].tick_params(axis='y', labelsize=8)
     axes[1].invert_yaxis()
 
     # Knockout Heatmap
@@ -209,20 +216,22 @@ def run_liquidity_evasion_analysis():
         xticklabels=token_labels, 
         yticklabels=list(range(num_layers)), 
         cmap="Oranges", 
-        annot=True, 
-        fmt=".2f", 
+        annot=False, 
         ax=axes[2],
         vmin=0, 
-        vmax=1
+        vmax=1,
+        cbar_kws={'label': "Normalized Knockout Effect"}
     )
-    axes[2].set_title("Knockout Patching (Necessary to maintain Compliance)")
-    axes[2].set_xlabel("Token Position")
-    axes[2].set_ylabel("Layer")
+    axes[2].set_title("(C) Knockout Patching (Causally Necessary)", fontsize=12, fontweight="bold", pad=10)
+    axes[2].set_xlabel("Token Position in Prompt", fontsize=10, fontweight="bold")
+    axes[2].set_ylabel("Model Layer", fontsize=10, fontweight="bold")
+    axes[2].tick_params(axis='x', rotation=60, labelsize=8)
+    axes[2].tick_params(axis='y', labelsize=8)
     axes[2].invert_yaxis()
 
     plt.tight_layout()
-    output_path = "liquidity_evasion_comparison.png"
-    plt.savefig(output_path, bbox_inches="tight")
+    output_path = "mats_probing/liquidity_evasion_comparison.png"
+    plt.savefig(output_path, bbox_inches="tight", dpi=300)
     print(f"Generated comparison plot successfully: {output_path}")
 
 if __name__ == "__main__":
