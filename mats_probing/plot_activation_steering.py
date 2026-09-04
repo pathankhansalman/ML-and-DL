@@ -114,14 +114,8 @@ def generate_steering_plots():
         except Exception:
             v_steer_pca = v_steer_mean.clone()
 
-        # Random control
-        torch.manual_seed(42)
-        rand_vec = torch.randn_like(v_steer_mean).to(device)
-        v_steer_rand = ((rand_vec / rand_vec.norm()) * v_steer_mean.norm()).half()
-
-        vectors_to_test = [("PCA", v_steer_pca), ("Mean", v_steer_mean), ("Random", v_steer_rand)]
-
-        for vec_name, vec in vectors_to_test:
+        # Evaluate PCA and Mean
+        for vec_name, vec in [("PCA", v_steer_pca), ("Mean", v_steer_mean)]:
             diffs = []
             kls = []
             for alpha in alphas:
@@ -144,6 +138,42 @@ def generate_steering_plots():
                 kls.append(kl)
 
             results[(target_layer_idx, vec_name)] = {'diffs': diffs, 'kls': kls}
+
+        # Evaluate Random Control: Average over 50 random vectors of equivalent norm
+        if target_layer_idx == 21:
+            print("Evaluating 50-sample Random Control baseline for Layer 21...")
+            torch.manual_seed(42)
+            rand_diffs_mean = []
+            rand_kls_mean = []
+
+            for alpha in alphas:
+                if alpha == 0.0:
+                    rand_diffs_mean.append(baseline_diff)
+                    rand_kls_mean.append(0.0)
+                    continue
+
+                alpha_diffs = []
+                alpha_kls = []
+                for _ in range(50):
+                    rand_vec = torch.randn_like(v_steer_mean).to(device)
+                    v_rand = ((rand_vec / rand_vec.norm()) * v_steer_mean.norm()).half()
+
+                    steer_hook = steering_hook_builder(v_rand, alpha=alpha)
+                    steer_handle = model.model.layers[target_layer_idx].mlp.register_forward_pre_hook(steer_hook)
+                    with torch.no_grad():
+                        steered_logits = model(**test_tokens).logits[0, -1]
+                    steer_handle.remove()
+
+                    d = (steered_logits[comply_id] - steered_logits[bypass_id]).item()
+                    probs = torch.softmax(steered_logits.float(), dim=-1)
+                    k = torch.sum(baseline_probs_f32 * (torch.log(baseline_probs_f32 + 1e-10) - torch.log(probs + 1e-10))).item()
+                    alpha_diffs.append(d)
+                    alpha_kls.append(k)
+
+                rand_diffs_mean.append(float(np.mean(alpha_diffs)))
+                rand_kls_mean.append(float(np.mean(alpha_kls)))
+
+            results[(21, "Random")] = {'diffs': rand_diffs_mean, 'kls': rand_kls_mean}
 
     # 3. Create Publication-Quality Plot
     print("Generating visualization...")
