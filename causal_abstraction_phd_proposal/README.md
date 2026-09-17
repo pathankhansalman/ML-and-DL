@@ -8,9 +8,9 @@
 
 | Week | Day | Topic | Status | Notes / Artifacts |
 |:---:|:---:|:---|:---:|:---|
-| **W1** | **Day 1** | SCMs, DAGs, $PA_i$, Structural Equations | ✅ Completed | Mastered SCM definitions $V_i := f_i(PA_i, U_i)$, graph surgery, and MDP DAGs. |
-| **W1** | **Day 2** | $do(\cdot)$ Operator & Truncated Factorization | ⏳ Next | |
-| **W1** | **Day 3** | d-Separation & Backdoor Criterion | ⬜ Pending | |
+| **W1** | **Day 1** | SCMs, DAGs, $PA_i$, Structural Equations | ✅ Completed | [notes](file:///c:/Users/patha/Documents/GitHub/ML-and-DL/causal_abstraction_phd_proposal/notes/day_01_scms_and_dags.md) \| [code](file:///c:/Users/patha/Documents/GitHub/ML-and-DL/causal_abstraction_phd_proposal/code/day_01_scm_simulation.py) |
+| **W1** | **Day 2** | $do(\cdot)$ Operator & Truncated Factorization | ✅ Completed | [notes](file:///c:/Users/patha/Documents/GitHub/ML-and-DL/causal_abstraction_phd_proposal/notes/day_02_do_operator_and_truncated_factorization.md) \| [code](file:///c:/Users/patha/Documents/GitHub/ML-and-DL/causal_abstraction_phd_proposal/code/day_02_truncated_factorization.py) |
+| **W1** | **Day 3** | d-Separation & Backdoor Criterion | ⏳ Next | |
 | **W1** | **Day 4** | Exogenous Noise ($U$) & Counterfactuals | ⬜ Pending | |
 | **W1** | **Day 5** | Hands-On Code Practice | ⬜ Pending | |
 | **W2** | **Days 8–12** | Formal Causal Abstractions (Beckers & Halpern, Rubenstein) | ⬜ Pending | Abstraction maps $\tau$, interventional maps $\omega$, Commutative diagrams. |
@@ -22,5 +22,6 @@
 ## 📂 Folder Structure
 
 - `notes/`: Daily theory notes, mathematical derivations, and paper summaries.
+  - [daily_spaced_repetition_tracker.md](file:///c:/Users/patha/Documents/GitHub/ML-and-DL/causal_abstraction_phd_proposal/notes/daily_spaced_repetition_tracker.md): Daily active recall questions for spaced repetition.
 - `code/`: Code exercises (DoWhy, PyTorch SCM implementation, and simulator scripts).
 - `proposal/`: Draft sections of the PhD proposal.
