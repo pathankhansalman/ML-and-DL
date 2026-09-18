@@ -25,11 +25,21 @@
 
 ---
 
+### Day 3: $d$-Separation, Backdoor Criterion, & Bad Controls
+* **Q3.1:** What are the 3 canonical 3-node junctions in a DAG? Which ones are naturally open vs. naturally blocked?
+* **Q3.2:** What happens to information flow through a collider ($A \rightarrow B \leftarrow C$) when you condition on $B$ (or a descendant of $B$)? What is this phenomenon called?
+* **Q3.3:** State the two conditions required for a set of variables $S$ to satisfy Pearl's Backdoor Criterion relative to $(X, Y)$.
+* **Q3.4:** Why is conditioning on a mediator ($X \rightarrow M \rightarrow Y$) considered a "bad control" when attempting to estimate the total causal effect of $X$ on $Y$?
+* **Q3.5:** What is M-bias, and why does controlling for the middle node in an M-structure introduce bias?
+
+---
+
 ## 📈 Review Schedule & Recall Log
 
 | Review Date | Questions Tested | Concept / Focus | Mastery Level (1–5) | Notes / Gaps |
 |:---:|:---|:---|:---:|:---|
-| *Day 2 (Today)* | Q2.2 – Q2.5 | 3 Distributions & Truncated Factorization | 5 / 5 ✅ | Mastered intuition: (1) passive observation, (2) intervention with upstream intact, (3) marginalizing out upstream. |
-| *Day 3* | Q2.1 – Q2.5, Day 3 questions | d-Separation & Backdoor paths | ⬜ Scheduled | Next session |
+| *Day 2* | Q2.2 – Q2.5 | 3 Distributions & Truncated Factorization | 5 / 5 ✅ | Mastered intuition: (1) passive observation, (2) intervention with upstream intact, (3) marginalizing out upstream. |
+| *Day 3 (Today)* | Q1.1–Q1.3, Q2.1–Q2.5 | SCMs, Exogenous vs Endogenous, Confounding & Truncated Factorization | 5 / 5 ✅ | Perfect recall: exogenous variables have no parents, graph surgery cuts incoming edges, marginalization yields backdoor formula. |
+| *Day 4* | Day 3 questions, Counterfactuals | d-Separation, Colliders, Exogenous Noise ($U$) & Counterfactuals | ⬜ Scheduled | Next session |
 | *Day 7 (W1 Review)* | All Week 1 Questions | Full Week 1 Synthesis | ⬜ Scheduled | |
 | *Day 14 (W2 Review)* | Week 1 & Week 2 Questions | Abstraction & Commutative Diagrams | ⬜ Scheduled | |

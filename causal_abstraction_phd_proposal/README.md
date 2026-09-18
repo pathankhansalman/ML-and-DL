@@ -10,8 +10,8 @@
 |:---:|:---:|:---|:---:|:---|
 | **W1** | **Day 1** | SCMs, DAGs, $PA_i$, Structural Equations | ✅ Completed | [notes](file:///c:/Users/patha/Documents/GitHub/ML-and-DL/causal_abstraction_phd_proposal/notes/day_01_scms_and_dags.md) \| [code](file:///c:/Users/patha/Documents/GitHub/ML-and-DL/causal_abstraction_phd_proposal/code/day_01_scm_simulation.py) |
 | **W1** | **Day 2** | $do(\cdot)$ Operator & Truncated Factorization | ✅ Completed | [notes](file:///c:/Users/patha/Documents/GitHub/ML-and-DL/causal_abstraction_phd_proposal/notes/day_02_do_operator_and_truncated_factorization.md) \| [code](file:///c:/Users/patha/Documents/GitHub/ML-and-DL/causal_abstraction_phd_proposal/code/day_02_truncated_factorization.py) |
-| **W1** | **Day 3** | d-Separation & Backdoor Criterion | ⏳ Next | |
-| **W1** | **Day 4** | Exogenous Noise ($U$) & Counterfactuals | ⬜ Pending | |
+| **W1** | **Day 3** | d-Separation & Backdoor Criterion | ✅ Completed | [notes](file:///c:/Users/patha/Documents/GitHub/ML-and-DL/causal_abstraction_phd_proposal/notes/day_03_d_separation_and_backdoor_criterion.md) \| [code](file:///c:/Users/patha/Documents/GitHub/ML-and-DL/causal_abstraction_phd_proposal/code/day_03_backdoor_and_colliders.py) |
+| **W1** | **Day 4** | Exogenous Noise ($U$) & Counterfactuals | ⏳ Next | |
 | **W1** | **Day 5** | Hands-On Code Practice | ⬜ Pending | |
 | **W2** | **Days 8–12** | Formal Causal Abstractions (Beckers & Halpern, Rubenstein) | ⬜ Pending | Abstraction maps $\tau$, interventional maps $\omega$, Commutative diagrams. |
 | **W3** | **Days 15–19** | Deep Dive: ICS4CSM (NeurIPS 2024 Paper) | ⬜ Pending | Dyer, Bishop, Felekis, Damoulas et al. |
