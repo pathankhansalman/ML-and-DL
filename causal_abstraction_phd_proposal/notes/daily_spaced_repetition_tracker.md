@@ -34,12 +34,22 @@
 
 ---
 
+### Day 4: Exogenous Noise ($U$), Counterfactuals, & Twin Networks
+* **Q4.1:** What fundamental distinction separates Rung 2 ($do(X)$) queries from Rung 3 ($Y_{X=x^*}$) counterfactual queries in terms of how exogenous noise $U$ is treated?
+* **Q4.2:** Walk through the 3 steps of Pearl's Counterfactual Algorithm (Abduction, Action, Prediction). What mathematical operation occurs in each?
+* **Q4.3:** In a Twin Network, what physical link connects the factual world (left) to the counterfactual world (right)?
+* **Q4.4:** In Causal Abstractions (ICS4CSM), why is *counterfactual consistency* a strictly harder condition than *interventional consistency*?
+
+---
+
 ## 📈 Review Schedule & Recall Log
 
 | Review Date | Questions Tested | Concept / Focus | Mastery Level (1–5) | Notes / Gaps |
 |:---:|:---|:---|:---:|:---|
 | *Day 2* | Q2.2 – Q2.5 | 3 Distributions & Truncated Factorization | 5 / 5 ✅ | Mastered intuition: (1) passive observation, (2) intervention with upstream intact, (3) marginalizing out upstream. |
-| *Day 3 (Today)* | Q1.1–Q1.3, Q2.1–Q2.5 | SCMs, Exogenous vs Endogenous, Confounding & Truncated Factorization | 5 / 5 ✅ | Perfect recall: exogenous variables have no parents, graph surgery cuts incoming edges, marginalization yields backdoor formula. |
-| *Day 4* | Day 3 questions, Counterfactuals | d-Separation, Colliders, Exogenous Noise ($U$) & Counterfactuals | ⬜ Scheduled | Next session |
+| *Day 3* | Q1.1–Q1.3, Q2.1–Q2.5 | SCMs, Exogenous vs Endogenous, Confounding & Truncated Factorization | 5 / 5 ✅ | Perfect recall: exogenous variables have no parents, graph surgery cuts incoming edges, marginalization yields backdoor formula. |
+| *Day 4 (Today)* | Q1.1–Q1.3, Q2.2–Q2.4, Q3.1–Q3.5 | SCMs, Colliders & Berkson's Bias, Pearl's Backdoor Criterion | 4.8 / 5 ✅ | Solidified: Backdoor rules (no descendants of X; block all backdoor paths), collider conditioning opens paths. |
+| *Day 5* | Day 4 questions, SCM implementations | Counterfactuals, Twin Networks, & Hands-On Practice | ⬜ Scheduled | Next session |
 | *Day 7 (W1 Review)* | All Week 1 Questions | Full Week 1 Synthesis | ⬜ Scheduled | |
 | *Day 14 (W2 Review)* | Week 1 & Week 2 Questions | Abstraction & Commutative Diagrams | ⬜ Scheduled | |
+
