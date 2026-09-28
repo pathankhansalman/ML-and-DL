@@ -48,8 +48,8 @@
 |:---:|:---|:---|:---:|:---|
 | *Day 2* | Q2.2 – Q2.5 | 3 Distributions & Truncated Factorization | 5 / 5 ✅ | Mastered intuition: (1) passive observation, (2) intervention with upstream intact, (3) marginalizing out upstream. |
 | *Day 3* | Q1.1–Q1.3, Q2.1–Q2.5 | SCMs, Exogenous vs Endogenous, Confounding & Truncated Factorization | 5 / 5 ✅ | Perfect recall: exogenous variables have no parents, graph surgery cuts incoming edges, marginalization yields backdoor formula. |
-| *Day 4 (Today)* | Q1.1–Q1.3, Q2.2–Q2.4, Q3.1–Q3.5 | SCMs, Colliders & Berkson's Bias, Pearl's Backdoor Criterion | 4.8 / 5 ✅ | Solidified: Backdoor rules (no descendants of X; block all backdoor paths), collider conditioning opens paths. |
-| *Day 5* | Day 4 questions, SCM implementations | Counterfactuals, Twin Networks, & Hands-On Practice | ⬜ Scheduled | Next session |
+| *Day 4 (Today)* | Weighted Days 1–4 Drill | SCMs, Truncated Factorization, Colliders & M-Bias, Pearl 3-Steps & Twin Networks | 3.6 / 5 ⚠️ | **Key gaps to review Day 5**: Colliders naturally BLOCKED (opened by conditioning); Backdoor condition #2 (blocks all backdoor paths); Counterfactual consistency requires preserving unit-level $u$. *Strategy update*: Randomize domains, variable names, and topologies each drill to avoid rote memorization. |
+| *Day 5 (Today)* | Gap Remediation + Synthesis Code | Colliders (Berkson's), Backdoor $G_{\underline{X}}$, ATE vs ITE, PyTorch & NetworkX | 4.8 / 5 ✅ | Mastered collider intuition, unit-level counterfactual noise $u$, and $G_{\underline{X}}$ (cutting outgoing edges of $X$ to isolate backdoor paths). Built PyTorch SCM and automated NetworkX backdoor solver. |
 | *Day 7 (W1 Review)* | All Week 1 Questions | Full Week 1 Synthesis | ⬜ Scheduled | |
 | *Day 14 (W2 Review)* | Week 1 & Week 2 Questions | Abstraction & Commutative Diagrams | ⬜ Scheduled | |
 
