@@ -110,6 +110,45 @@ causal_ad_uplift/
 ## 🚀 How to Run
 
 ```bash
-# Run the complete benchmark
+# Run unit test suite
+python causal_ad_uplift/test_pipeline.py
+
+# Run the complete benchmark & generate Qini curve plot
 python causal_ad_uplift/run_experiment.py
 ```
+
+---
+
+## 📚 References & Key Papers
+
+1. **Criteo Uplift Benchmark Paper:**
+   * Diemert, E., Meynet, J., Gallinari, P., & Lefortier, M. (2018).  
+     *"A Large Scale Benchmark for Uplift Modeling."*  
+     Proceedings of the AdKDD & KDD TargetAd Workshop (ACM).  
+     [ACM Digital Library](https://dl.acm.org/doi/10.1145/3269206.3275466) | [Criteo AI Lab Dataset](https://ailab.criteo.com/criteo-uplift-prediction-dataset/)
+
+2. **Class Variable Transformation (Lai's Method / Modified Target):**
+   * Jaskowski, M., & Jaroszewicz, S. (2012).  
+     *"Uplift modeling for clinical trials and marketing campaigns."*  
+     Pattern Recognition and Computer Vision.  
+     *(Formulates the Z-target transformation $Z = Y \cdot T + (1-Y)(1-T)$ used in this module)*.
+   * Lai, Y. T. (2006).  
+     *"A direct approach to uplift modeling."*  
+     Master's thesis, Department of Computer Science and Engineering, University of Louisville.
+
+3. **Evaluation Metrics (The Qini Curve):**
+   * Radcliffe, N. J. (2007).  
+     *"Using control groups to target on incremental outcome: Uplift modeling with causal trees."*  
+     Scientific Computing World, 19(2), 19-21.  
+     *(Introduces the Radcliffe Qini curve and AUUC metric)*.
+
+4. **Survey & Overview:**
+   * Gutierrez, P., & Gérardy, J. Y. (2017).  
+     *"Causal Inference and Uplift Modelling: A Review of the Literature."*  
+     Proceedings of the 3rd International Conference on Predictive Applications and APIs, PMLR 67:1-13.
+
+5. **Counterfactual Learning in Display Advertising:**
+   * Bottou, L., Peters, J., Quiñonero-Candela, J., Charles, D. X., Chickering, D. M., Portugaly, E., Ray, D., Simard, P., & Snelson, E. (2013).  
+     *"Counterfactual reasoning and learning systems: The example of display advertising."*  
+     Journal of Machine Learning Research (JMLR), 14(11), 3207-3260.
+
